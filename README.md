@@ -13,11 +13,11 @@ This repository is licensed under [MIT License](LICENSE)
 ![image10 2](https://user-images.githubusercontent.com/76808676/106876656-f51cda80-66fd-11eb-8564-2ac29a439778.png)
 ![image10 3](https://user-images.githubusercontent.com/76808676/106876660-f51cda80-66fd-11eb-939d-ef16c6af529b.png)
 
-## [Exception Handeling]
+# [Exception Handeling]
 
 ## Links to other repositories
 [Travelocity]
 
 
 [Travelocity]: https://github.com/voyager2005/Travelocity
-[Exception Handeling]: https://github.com/voyager2005/aeroplane-seat-reservation-python/EXCEPTION_HANDELING
+[Exception Handeling]: https://github.com/voyager2005/aeroplane-seat-reservation-python/blob/main/EXCEPTION_HANDELING.md
