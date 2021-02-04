@@ -26,7 +26,7 @@ current_location = "unknown"
 destination = "unknown"
 
 # declaring variables to print the seating pattern
-occupied_seats = [True, False,                             # row 1
+occupied_seats = [False, False,                             # row 1
                   False, True,                             # row 2
                   True, True, False, True,                 # row 3
                   True, False, False, False,               # row 4
@@ -116,11 +116,11 @@ def other_details():
     # declaring the value of terminator
     terminator = int(total_number_of_seats)
 
-    # accepting the date of travel
-    dt, mt, yt = [int(x) for x in input("Enter Travel Date: ").split('/')]
-    travel_date = date(yt, mt, dt)
-
     while True:
+        # accepting the date of travel
+        dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]  # make sure to follow the syntax
+        travel_date = date(yt, mt, dt)
+
         its_todays_date = False
         its_a_proper_date = False
         its_an_invalid_date = True
@@ -144,8 +144,6 @@ def other_details():
                     its_todays_date = False
                     its_an_invalid_date = False
                     its_a_proper_date = True
-        else:
-            continue
 
         if its_todays_date:
             travel_time = input("Since you are travelling today, please enter timings (HH:MM): ")
@@ -160,6 +158,7 @@ def other_details():
             travel_time = input("Please enter time of travel (hh:mm): ")
             break
         elif its_an_invalid_date:
+            print(f"{bcolors.WARNING}Looks like you are from the past...{bcolors.ENDC}")
             continue
 
     # accepting the current location
