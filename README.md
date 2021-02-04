@@ -14,7 +14,6 @@ This repository is licensed under [MIT License](LICENSE)
 ![image10 3](https://user-images.githubusercontent.com/76808676/106876660-f51cda80-66fd-11eb-939d-ef16c6af529b.png)
 
 # [Exception Handeling]
-# Cases of Exception Handeling
 ## Case 1: When accpeting phone numbers
 ![image10 4](https://user-images.githubusercontent.com/76808676/106879027-a58bde00-6700-11eb-8c8e-dfcde2a398d9.png)
 ## Case 2: When entering the date
