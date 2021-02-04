@@ -1,12 +1,27 @@
-from colors import bcolors
 import sys
-from random import seed
+import time
+import datetime
+
+from colors import bcolors
+
 from random import random
+from random import seed
+
+from datetime import date
 
 # declaring global variables
 name = "username"
 phone_number = 0000000000
 travel_date = "dd mm yyyy"
+travel_time = "00:00"
+
+today_date = datetime.datetime.now()  # getting today's date and formatting it
+
+from datetime import datetime
+today_time = datetime.now().strftime("%H:%M")  # getting today's time and formatting it
+
+total_number_of_seats = 0
+terminator = 0
 current_location = "unknown"
 destination = "unknown"
 
@@ -42,7 +57,8 @@ def display_welcome():
     print(" * *   * *   *         *        *        *       *   *     *   *       ")
     print(" *       *   * * * *   * * * *   * * *    * * * *    *     *   * * * * ")
     print(f"{bcolors.BOLD}{bcolors.HEADER}{bcolors.UNDERLINE}Welcome to https://github.com/voyager2005 Travels, "
-          f"We would like to take some information: {bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}")
+          f"We would like to take some information:{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}")
+
 
 # accepting the users name
 def accept_name():
@@ -72,9 +88,14 @@ def accept_name():
 # accepting other details from the user like his phone number, current location and destination
 def other_details():
     global phone_number
+    global total_number_of_seats
     global current_location
     global destination
     global travel_date
+    global today_date
+    global travel_time
+    global today_time
+    global terminator
 
     # accepting the phone number of the user
     phone_number = input("Enter your phone number: ")
@@ -83,8 +104,63 @@ def other_details():
         print("The phone number you entered was " + str(len(phone_number)) + " digits long ")
         phone_number = input("Please enter the phone number: ")
 
+    # accepting the total number of seats the user wants to book
+    total_number_of_seats = input("Total number of reservations: ")
+
+    if total_number_of_seats == 0:
+        total_number_of_seats = input(f"{bcolors.WARNING}ZERO? Please enter the proper value: {bcolors.ENDC}")
+    elif 0 >= int(total_number_of_seats):
+        total_number_of_seats = input(f"{bcolors.WARNING}You have entered a negative value... Please enter the "
+                                      f"number of reservations as a positive value: {bcolors.ENDC}")
+
+    # declaring the value of terminator
+    terminator = int(total_number_of_seats)
+
     # accepting the date of travel
-    travel_date = input("Travel Date(dd mm yyyy): ")
+    dt, mt, yt = [int(x) for x in input("Enter Travel Date: ").split('/')]
+    travel_date = date(yt, mt, dt)
+
+    while True:
+        its_todays_date = False
+        its_a_proper_date = False
+        its_an_invalid_date = True
+
+        if int(today_date.year) == int(yt) and int(today_date.month) == int(mt) and int(today_date.day) == int(dt):
+            its_todays_date = True
+            its_an_invalid_date = False
+            its_a_proper_date = False
+        elif int(today_date.year) < int(yt):
+            its_todays_date = False
+            its_an_invalid_date = False
+            its_a_proper_date = True
+        elif int(today_date.year) == int(yt):
+            if int(today_date.month) < int(mt):
+                its_todays_date = False
+                its_an_invalid_date = False
+                its_a_proper_date = True
+        elif int(today_date.year) == int(yt):
+            if int(today_date.month) == int(mt):
+                if int(today_date.day) < int(dt):
+                    its_todays_date = False
+                    its_an_invalid_date = False
+                    its_a_proper_date = True
+        else:
+            continue
+
+        if its_todays_date:
+            travel_time = input("Since you are travelling today, please enter timings (HH:MM): ")
+            while True:
+                if today_time > travel_time:
+                    travel_time = input(f"{bcolors.WARNING}Looks like that time has already passed."
+                                        f" Please enter proper time: {bcolors.ENDC}")
+                else:
+                    break
+            break
+        elif its_a_proper_date:
+            travel_time = input("Please enter time of travel (hh:mm): ")
+            break
+        elif its_an_invalid_date:
+            continue
 
     # accepting the current location
     current_location = input("From: ")
@@ -93,8 +169,8 @@ def other_details():
     destination = input("To: ")
 
     # converting current_location and destination into upper case
-    current_location = current_location.upper()
-    destination = destination.upper()
+    current_location = current_location.capitalize()
+    destination = destination.capitalize()
 
 
 def display_aeroplane_seat():
@@ -232,38 +308,39 @@ def accept_users_seat():
     global users_seat
     global all_seats_index
     global occupied_seats
+    global terminator
 
-    terminator = 1
-    while terminator <= 24:
-        # accepting users seat
-        users_seat[number_of_seats_booked] = input(f"{bcolors.BOLD}Please enter the seat "
-                                                   f"that you want to book: {bcolors.ENDC}")
+    while True:
+        if terminator > 0:
+            terminator = terminator - 1
+            # accepting users seat
+            users_seat[number_of_seats_booked] = input(f"{bcolors.BOLD}Please enter the seat "
+                                                       f"that you want to book: {bcolors.ENDC}")
 
-        # finding index of all seats
-        for j in range(0, len(all_seats)):
-            if all_seats[j] == users_seat[number_of_seats_booked]:
-                all_seats_index = j
+            # finding index of all seats
+            for j in range(0, len(all_seats)):
+                if all_seats[j] == users_seat[number_of_seats_booked]:
+                    all_seats_index = j
 
-        if occupied_seats[all_seats_index]:
-            print(f"{bcolors.WARNING}{bcolors.BOLD}That seat has already been booked/reserved"
-                  f"{bcolors.ENDC}{bcolors.ENDC}")
-            continue
-        elif not occupied_seats[all_seats_index]:
-            occupied_seats[all_seats_index] = True
-            number_of_seats_booked += 1
-            print(f"{bcolors.OKCYAN}Your seat {users_seat[number_of_seats_booked-1]} has been booked{bcolors.ENDC}")
+            if occupied_seats[all_seats_index]:
+                print(f"{bcolors.WARNING}{bcolors.BOLD}That seat has already been booked/reserved"
+                      f"{bcolors.ENDC}{bcolors.ENDC}")
+                continue
+            elif not occupied_seats[all_seats_index]:
+                occupied_seats[all_seats_index] = True
+                number_of_seats_booked += 1
+                print(
+                    f"{bcolors.OKCYAN}Your seat {users_seat[number_of_seats_booked - 1]} has been booked{bcolors.ENDC}")
 
-        # asking if the user wants to book another seat
-        while True:
-            choice = input("Do you want to reserve another seat? ")
-            choice = choice.upper()
-            if choice == "YES":
-                print("\n"*40)
+            time.sleep(3)
+
+            # printing 40 lines of space:
+            print("\n" * 40)
+
+            if terminator > 0:
                 display_aeroplane_seat()
-            elif choice == "NO":
-                display_boarding_pass()
-            else:
-                print(f"{bcolors.WARNING}Please enter either {bcolors.BOLD}yes or no{bcolors.ENDC}{bcolors.ENDC}")
+
+        display_boarding_pass()
 
 
 # displaying boarding pass
@@ -277,13 +354,16 @@ def display_boarding_pass():
 
     seed(10)
 
+    _date = str(travel_date)
+
     for i in range(0, number_of_seats_booked):
         value = random() * 10
         #  I know you want to change the travels name? ↓↓↓
-        print("   https://github.com/voyager2005 Travels       ")
-        print("            BOARDING PASS                      ")
+        print("   https://github.com/voyager2005 Travels      ")
+        print(f"                {bcolors.BOLD}BOARDING PASS{bcolors.ENDC}                      ")
         print(name + "\t" + "Flight: OKL012" + "\t" + users_seat[i])
-        print(f"Gate: {int(value)}" + "     " + "date: " + travel_date + "\t" + "cost: 15000")
+        print(f"Gate: {int(value)}" + "     " + "date: " + _date + "\t" + "cost: 15000")
+        print(f"From: {current_location} \t\t To: {destination}")
         print()
 
     sys.exit()
