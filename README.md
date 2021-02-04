@@ -3,7 +3,6 @@
 ## Why I made This:
 I made this as a .py version of the [aeroplane-seat-reservation.java]
 <br />**Please ⭐ this repository if you liked it so that more people can get this code**
-<br />_forgive me the image quality is poor. I will take better screen shots and update that soon_
 
 ## License and copyright
 This repository is licensed under [MIT License](LICENSE)
