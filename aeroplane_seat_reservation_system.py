@@ -24,9 +24,10 @@ total_number_of_seats = 0
 terminator = 0
 current_location = "unknown"
 destination = "unknown"
+cost = 0.0
 
 # declaring variables to print the seating pattern
-occupied_seats = [False, False,                             # row 1
+occupied_seats = [True, False,                             # row 1
                   False, True,                             # row 2
                   True, True, False, True,                 # row 3
                   True, False, False, False,               # row 4
@@ -118,7 +119,7 @@ def other_details():
 
     while True:
         # accepting the date of travel
-        dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]  # make sure to follow the syntax
+        dt, mt, yt = [int(x) for x in input("Enter Travel Date: ").split('/')]
         travel_date = date(yt, mt, dt)
 
         its_todays_date = False
@@ -346,6 +347,7 @@ def accept_users_seat():
 def display_boarding_pass():
     global users_seat
     global number_of_seats_booked
+    global cost
 
     print("\n"*40)
     print(f"{bcolors.BOLD}{bcolors.UNDERLINE}{bcolors.HEADER}Boarding Pass for all the seats that you booked:"
@@ -357,11 +359,23 @@ def display_boarding_pass():
 
     for i in range(0, number_of_seats_booked):
         value = random() * 10
+
+        # calculating the cost for the type of seat booked
+        seat_booked = users_seat[i]
+        seat_type = seat_booked[0]
+
+        if int(seat_type) <= 2:
+            cost = 300000
+        elif int(seat_type) <= 5:
+            cost = 150000
+        else:
+            cost = 75000
+
         #  I know you want to change the travels name? ↓↓↓
         print("   https://github.com/voyager2005 Travels      ")
         print(f"                {bcolors.BOLD}BOARDING PASS{bcolors.ENDC}                      ")
         print(name + "\t" + "Flight: OKL012" + "\t" + users_seat[i])
-        print(f"Gate: {int(value)}" + "     " + "date: " + _date + "\t" + "cost: 15000")
+        print(f"Gate: {int(value)}" + "     " + "date: " + _date + "\t" + "cost: " + str(cost))
         print(f"From: {current_location} \t\t To: {destination}")
         print()
 
