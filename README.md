@@ -11,6 +11,10 @@ This repository is licensed under [MIT License](LICENSE)
 ![image10 2](https://user-images.githubusercontent.com/76808676/106876656-f51cda80-66fd-11eb-8564-2ac29a439778.png)
 ![image10 3](https://user-images.githubusercontent.com/76808676/106876660-f51cda80-66fd-11eb-939d-ef16c6af529b.png)
 
+## Latest Update:
+**Calcualting the cost**
+![image9 9](https://user-images.githubusercontent.com/76808676/107035137-b3fbf780-67dd-11eb-8486-7dc7216b1321.png)
+
 ## How to customize this..
 You can change the colouring of the text... ie. change ```{bcolors.WARNING}...{bcolors.ENDC``` to ```{bcolors.FAIL}...{bcolors.ENDC}```
 <br />You can change the availability of seats by chnaging the boolean value of ``` occupies_seats[]``` variable
