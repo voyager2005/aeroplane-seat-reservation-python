@@ -119,7 +119,7 @@ def other_details():
 
     while True:
         # accepting the date of travel
-        dt, mt, yt = [int(x) for x in input("Enter Travel Date: ").split('/')]
+        dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]  # make sure to follow the syntax
         travel_date = date(yt, mt, dt)
 
         its_todays_date = False
