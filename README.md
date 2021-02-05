@@ -1,8 +1,6 @@
 # aeroplane-seat-reservation-python
 
-## Why I made This:
-I made this as a .py version of the [aeroplane-seat-reservation.java]
-<br />**Please ⭐ this repository if you liked it so that more people can get this code**
+## **Please ⭐ this repository if you liked it so that more people can get this code**
 
 ## License and copyright
 This repository is licensed under [MIT License](LICENSE)
