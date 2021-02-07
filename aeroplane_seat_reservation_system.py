@@ -100,6 +100,14 @@ def other_details():
 
     # accepting the phone number of the user
     phone_number = input("Enter your phone number: ")
+
+    while True:
+        if not phone_number.isdigit():
+            phone_number = input(f"{bcolors.WARNING}Looks like your phone number has alphabets... "
+                                 f"Please enter the correct value: {bcolors.ENDC}")
+        else:
+            break
+
     while len(phone_number) != 10:
         print("Please make sure that the phone number that you have entered is 10 digits long")
         print("The phone number you entered was " + str(len(phone_number)) + " digits long ")
@@ -108,11 +116,23 @@ def other_details():
     # accepting the total number of seats the user wants to book
     total_number_of_seats = input("Total number of reservations: ")
 
-    if total_number_of_seats == 0:
-        total_number_of_seats = input(f"{bcolors.WARNING}ZERO? Please enter the proper value: {bcolors.ENDC}")
-    elif 0 >= int(total_number_of_seats):
-        total_number_of_seats = input(f"{bcolors.WARNING}You have entered a negative value... Please enter the "
-                                      f"number of reservations as a positive value: {bcolors.ENDC}")
+    available_number_of_seats = 0
+
+    for i in range(0, len(occupied_seats)):
+        if occupied_seats[i]:
+            available_number_of_seats += 1
+
+    while True:
+        if int(total_number_of_seats) == 0:
+            total_number_of_seats = input(f"{bcolors.WARNING}ZERO? Please enter the proper value: {bcolors.ENDC}")
+        elif 0 >= int(total_number_of_seats):
+            total_number_of_seats = input(f"{bcolors.WARNING}You have entered a negative value... Please enter the "
+                                          f"number of reservations as a positive value: {bcolors.ENDC}")
+        elif int(total_number_of_seats) >= available_number_of_seats:
+            total_number_of_seats = input(f"{bcolors.WARNING}We don't have that many seats available... "
+                                          f"Please enter a lower value: {bcolors.ENDC}")
+        else:
+            break
 
     # declaring the value of terminator
     terminator = int(total_number_of_seats)
@@ -121,6 +141,11 @@ def other_details():
         # accepting the date of travel
         dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]
         travel_date = date(yt, mt, dt)
+
+        if int(yt) >= (3 + int(today_date.year)):
+            print(f"{bcolors.WARNING}You are travelling {int(yt)-int(today_date.year)} years from now?"
+                  f" We don't have tickets for that time...{bcolors.ENDC}")
+            continue
 
         its_todays_date = False
         its_a_proper_date = False
@@ -157,7 +182,6 @@ def other_details():
             break
         elif its_a_proper_date:
             travel_time = input("Please enter time of travel (hh:mm): ")
-            break
         elif its_an_invalid_date:
             print(f"{bcolors.WARNING}Looks like you are from the past...{bcolors.ENDC}")
             continue
