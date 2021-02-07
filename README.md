@@ -1,7 +1,12 @@
 # aeroplane-seat-reservation-python
 
 ## Announcement 🔊:
-**🔴IMPORTANT🔴** Images given below are outdated due to the new updates added into the program. The imgaes will be changed before 08/02/2021, 12:00am IST
+**🔴IMPORTANT🔴** :
+- [ ] Images given below are outdated due to the new updates added into the program. The imgaes will be changed before 08/02/2021, 12:00am IST
+
+**🔵OTHER🔵**:
+- [ ] Adding new exception handeling cases soon
+- [ ] A Train Seat Reservation system program is still a work in progress
 
 ## License and copyright
 This repository is licensed under [MIT License](LICENSE)
