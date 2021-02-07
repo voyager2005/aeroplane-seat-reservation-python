@@ -119,7 +119,7 @@ def other_details():
 
     while True:
         # accepting the date of travel
-        dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]  # make sure to follow the syntax
+        dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]
         travel_date = date(yt, mt, dt)
 
         its_todays_date = False
@@ -312,7 +312,6 @@ def accept_users_seat():
 
     while True:
         if terminator > 0:
-            terminator = terminator - 1
             # accepting users seat
             users_seat[number_of_seats_booked] = input(f"{bcolors.BOLD}Please enter the seat "
                                                        f"that you want to book: {bcolors.ENDC}")
@@ -331,6 +330,7 @@ def accept_users_seat():
                 number_of_seats_booked += 1
                 print(
                     f"{bcolors.OKCYAN}Your seat {users_seat[number_of_seats_booked - 1]} has been booked{bcolors.ENDC}")
+                terminator = terminator - 1
 
             time.sleep(3)
 
