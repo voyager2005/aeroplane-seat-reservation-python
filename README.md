@@ -1,6 +1,7 @@
 # aeroplane-seat-reservation-python
 
-## **Please ⭐ this repository if you liked it so that more people can get this code**
+## Announcement 🔊:
+**🔴IMPORTANT🔴** Images given below are outdated due to the new updates added into the program. The imgaes will be changed before 08/02/2021, 12:00am IST
 
 ## License and copyright
 This repository is licensed under [MIT License](LICENSE)
