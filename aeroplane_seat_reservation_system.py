@@ -182,6 +182,7 @@ def other_details():
             break
         elif its_a_proper_date:
             travel_time = input("Please enter time of travel (hh:mm): ")
+            break
         elif its_an_invalid_date:
             print(f"{bcolors.WARNING}Looks like you are from the past...{bcolors.ENDC}")
             continue
