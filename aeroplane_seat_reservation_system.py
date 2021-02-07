@@ -171,6 +171,9 @@ def other_details():
                     its_an_invalid_date = False
                     its_a_proper_date = True
 
+        flag1 = False
+        flag2 = False
+
         if its_todays_date:
             travel_time = input("Since you are travelling today, please enter timings (HH:MM): ")
             while True:
@@ -181,7 +184,24 @@ def other_details():
                     break
             break
         elif its_a_proper_date:
+            flag1 = False
+            flag2 = False
             travel_time = input("Please enter time of travel (hh:mm): ")
+            while True:
+                if int(travel_time[0:2]) > 23:
+                    travel_time = input(f"{bcolors.FAIL}INVALID TIMINGS{bcolors.ENDC} "
+                                        f"Please enter the correct timings: ")
+                    flag1 = True
+                if int(travel_time[3:5]) > 59:
+                    travel_time = input(f"{bcolors.FAIL}INVALID MINUTES{bcolors.ENDC} "
+                                        f"Please enter the correct timings: ")
+                    flag2 = True
+                if flag1 or flag2:
+                    flag1 = False
+                    flag2 = False
+                    continue
+                else:
+                    break
             break
         elif its_an_invalid_date:
             print(f"{bcolors.WARNING}Looks like you are from the past...{bcolors.ENDC}")
