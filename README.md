@@ -2,7 +2,7 @@
 
 ## Announcement 🔊:
 **🔴IMPORTANT🔴** :
-- [ ] Images given below are outdated due to the new updates added into the program. The imgaes will be changed before 08/02/2021, 12:00am IST
+No important things to imform
 
 **🔵OTHER🔵**:
 - [ ] Adding new exception handeling cases soon
