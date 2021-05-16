@@ -6,6 +6,10 @@ Few new things have been added into the code [16/05/2021]
 - [ ] different names is asked for each seat
 - [ ] different phone number is asked for each seat
 
+If you want the code before this change you can access that code [here]
+
+[here]: https://github.com/voyager2005/aeroplane-seat-reservation-python/blob/main/original%20code.txt
+
 **🔵OTHER🔵**:
 - [ ] Adding new exception handeling cases soon
 - [ ] A Train Seat Reservation system program is still a work in progress
