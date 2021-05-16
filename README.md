@@ -2,7 +2,9 @@
 
 ## Announcement 🔊:
 **🔴IMPORTANT🔴** :
-No important things to imform
+Few new things have been added into the code [16/05/2021]
+- [ ] different names is asked for each seat
+- [ ] different phone number is asked for each seat
 
 **🔵OTHER🔵**:
 - [ ] Adding new exception handeling cases soon
