@@ -9,9 +9,9 @@ from random import seed
 
 from datetime import date
 
-# declaring global variables
-name = "username"
-phone_number = 0000000000
+# declaring global variables -------------------------------------------------------------------------------
+name = ["username"] * 28
+phone_number = [000000000] * 28
 travel_date = "dd mm yyyy"
 travel_time = "00:00"
 
@@ -22,11 +22,12 @@ today_time = datetime.now().strftime("%H:%M")  # getting today's time and format
 
 total_number_of_seats = 0
 terminator = 0
+current_user_number = 0
 current_location = "unknown"
 destination = "unknown"
 cost = 0.0
 
-# declaring variables to print the seating pattern
+# declaring variables to print the seating pattern ---------------------------------------------------------
 occupied_seats = [True, False,                             # row 1
                   False, True,                             # row 2
                   True, True, False, True,                 # row 3
@@ -43,7 +44,7 @@ all_seats = ["1A", "1F", "2A", "2F", "3A", "3B", "3E", "3F", "4A", "4B", "4E", "
              "9A", "9B", "9C", "9D", "9E", "9F", "10A", "10B", "10C", "10D", "10E", "10F",
              "11A", "11B", "11C", "11D", "11E", "11F"]
 
-# declaring global variables to accept the seat from the user
+# declaring global variables to accept the seat from the user --------------------------------------------
 number_of_seats_booked = 0
 users_seat = ["nothing here"] * 28
 all_seats_index = 0
@@ -61,64 +62,22 @@ def display_welcome():
           f"We would like to take some information:{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}")
 
 
-# accepting the users name
-def accept_name():
-    global name
-
-    name = input("Your name please: ")  # accepting the users name
-    name.strip()  # removing unwanted spaces before and after the name
-    name = name + " "  # adding a space after the name
-
-    # declaration
-    word = ""
-    new_name = ""
-
-    # capitalizing name
-    for i in range(0, len(name)):
-        ch = name[i]
-        word = word + ch
-
-        if ch == ' ':
-            word = word.capitalize()
-            new_name = new_name + word
-            word = ""
-
-    name = new_name
-
-
-# accepting other details from the user like his phone number, current location and destination
-def other_details():
-    global phone_number
+def constant_details():
     global total_number_of_seats
+    global terminator
     global current_location
     global destination
     global travel_date
     global today_date
     global travel_time
     global today_time
-    global terminator
 
-    # accepting the phone number of the user
-    phone_number = input("Enter your phone number: ")
-
-    while True:
-        if not phone_number.isdigit():
-            phone_number = input(f"{bcolors.WARNING}Looks like your phone number has alphabets... "
-                                 f"Please enter the correct value: {bcolors.ENDC}")
-        else:
-            break
-
-    while len(phone_number) != 10:
-        print("Please make sure that the phone number that you have entered is 10 digits long")
-        print("The phone number you entered was " + str(len(phone_number)) + " digits long ")
-        phone_number = input("Please enter the phone number: ")
-
-    # accepting the total number of seats the user wants to book
+    # accepting the total number of seats the user wants to book --------------------------------------------
     total_number_of_seats = input("Total number of reservations: ")
 
     available_number_of_seats = 0
 
-    for i in range(0, len(occupied_seats)):
+    for i in range(0, len(occupied_seats)):  # finding the available number of seats
         if occupied_seats[i]:
             available_number_of_seats += 1
 
@@ -136,9 +95,10 @@ def other_details():
 
     # declaring the value of terminator
     terminator = int(total_number_of_seats)
+    terminator = terminator - 1
 
     while True:
-        # accepting the date of travel
+        # accepting the date of travel ----------------------------------------------------------------------
         dt, mt, yt = [int(x) for x in input("Enter Travel Date (dd/mm/yyyy): ").split('/')]
         travel_date = date(yt, mt, dt)
 
@@ -150,6 +110,9 @@ def other_details():
         its_todays_date = False
         its_a_proper_date = False
         its_an_invalid_date = True
+
+        if int(today_date.month) == int(mt):
+            its_a_proper_date = True
 
         if int(today_date.year) == int(yt) and int(today_date.month) == int(mt) and int(today_date.day) == int(dt):
             its_todays_date = True
@@ -207,15 +170,60 @@ def other_details():
             print(f"{bcolors.WARNING}Looks like you are from the past...{bcolors.ENDC}")
             continue
 
-    # accepting the current location
+    # accepting the current location ------------------------------------------------------------------
     current_location = input("From: ")
 
-    # accepting the destination
+    # accepting the destination -----------------------------------------------------------------------
     destination = input("To: ")
 
     # converting current_location and destination into upper case
     current_location = current_location.capitalize()
     destination = destination.capitalize()
+
+
+def variable_information():
+    global name
+    global phone_number
+    global current_user_number
+
+    # accepting the name of the user
+    name[current_user_number] = input("Your name please: ")  # accepting the users name
+    name[current_user_number].strip()  # removing unwanted spaces before and after the name
+    name[current_user_number] = name[current_user_number] + " "  # adding a space after the name
+
+    # declaration
+    name_operator = name[current_user_number]
+    word = ""
+    new_name = ""
+
+    # capitalizing name ----------------------------------------------------------------------------
+    for i in range(0, len(name_operator)):
+        ch = name_operator[i]
+        word = word + ch
+
+        if ch == ' ':
+            word = word.capitalize()
+            new_name = new_name + word
+            word = ""
+
+    name[current_user_number] = new_name
+
+    # accepting the phone number of the user --------------------------------------------------------
+    phone_number = input("Enter your phone number: ")
+
+    while True:
+        if not phone_number.isdigit():
+            phone_number = input(f"{bcolors.WARNING}Looks like your phone number has alphabets... "
+                                 f"Please enter the correct value: {bcolors.ENDC}")
+        else:
+            break
+
+    while len(phone_number) != 10:
+        print("Please make sure that the phone number that you have entered is 10 digits long")
+        print("The phone number you entered was " + str(len(phone_number)) + " digits long ")
+        phone_number = input("Please enter the phone number: ")
+
+    display_aeroplane_seat()
 
 
 def display_aeroplane_seat():
@@ -224,7 +232,7 @@ def display_aeroplane_seat():
     global all_seats
 
     # displaying Business Class
-    print("             " + f"{bcolors.BOLD}Business Class{bcolors.ENDC}" + "           ")
+    print("              " + f"{bcolors.BOLD}First Class{bcolors.ENDC}" + "              ")
 
     for i in range(0, 4):
         # displaying 1A and 2A with colour code
@@ -240,7 +248,7 @@ def display_aeroplane_seat():
             print(f"{bcolors.OKGREEN}{all_seats[i]}{bcolors.ENDC}" + " ▢", end="\n")
 
     # displaying First Class
-    print("              " + f"{bcolors.BOLD}First Class{bcolors.ENDC}" + "              ")
+    print("             " + f"{bcolors.BOLD}Business Class{bcolors.ENDC}" + "           ")
 
     for i in range(4, 16):
         # displaying 3A, 4A and 5A with colour code
@@ -347,16 +355,16 @@ def display_aeroplane_seat():
     accept_users_seat()
 
 
-# accepting the users seat number
-def accept_users_seat():
+def accept_users_seat():  # accepting the users seat number ---------------------------------------------------
     global number_of_seats_booked
     global users_seat
     global all_seats_index
     global occupied_seats
     global terminator
+    global current_user_number
 
     while True:
-        if terminator > 0:
+        if current_user_number <= terminator:
             # accepting users seat
             users_seat[number_of_seats_booked] = input(f"{bcolors.BOLD}Please enter the seat "
                                                        f"that you want to book: {bcolors.ENDC}")
@@ -375,22 +383,22 @@ def accept_users_seat():
                 number_of_seats_booked += 1
                 print(
                     f"{bcolors.OKCYAN}Your seat {users_seat[number_of_seats_booked - 1]} has been booked{bcolors.ENDC}")
-                terminator = terminator - 1
+                current_user_number = current_user_number + 1
 
             time.sleep(3)
 
             # printing 40 lines of space:
             print("\n" * 40)
 
-            if terminator > 0:
-                display_aeroplane_seat()
+            if current_user_number <= terminator:
+                variable_information()
 
         display_boarding_pass()
 
 
-# displaying boarding pass
-def display_boarding_pass():
+def display_boarding_pass():  # displaying boarding pass --------------------------------------------------------
     global users_seat
+    global name
     global number_of_seats_booked
     global cost
 
@@ -401,25 +409,25 @@ def display_boarding_pass():
     seed(10)
 
     _date = str(travel_date)
+    value = random() * 10
 
     for i in range(0, number_of_seats_booked):
-        value = random() * 10
 
         # calculating the cost for the type of seat booked
         seat_booked = users_seat[i]
         seat_type = seat_booked[0]
 
         if int(seat_type) <= 2:
-            cost = 300000
+            cost = 100000
         elif int(seat_type) <= 5:
-            cost = 150000
+            cost = 40000
         else:
-            cost = 75000
+            cost = 10000
 
         #  I know you want to change the travels name? ↓↓↓
         print("   https://github.com/voyager2005 Travels      ")
         print(f"                {bcolors.BOLD}BOARDING PASS{bcolors.ENDC}                      ")
-        print(name + "\t" + "Flight: OKL012" + "\t" + users_seat[i])
+        print(name[i] + "\t" + "Flight: OKL012" + "\t" + "Seat Number: " + users_seat[i])
         print(f"Gate: {int(value)}" + "     " + "date: " + _date + "\t" + "cost: " + str(cost))
         print(f"From: {current_location} \t\t To: {destination}")
         print()
@@ -430,6 +438,5 @@ def display_boarding_pass():
 # calling the methods
 while True:
     display_welcome()
-    accept_name()
-    other_details()
-    display_aeroplane_seat()
+    constant_details()
+    variable_information()
