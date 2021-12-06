@@ -1,6 +1,9 @@
 # aeroplane-seat-reservation-python
 
 ## Announcement 🔊:
+**[THE LATEST VERSION OF THIS PROGRAM IS AVAILABLE HERE]**
+[THE LATEST VERYSION OF THIS PROGRAM IS AVAILABLE HERE]: https://github.com/voyager2005/airplane-reservation-system-python-2
+
 **🔴IMPORTANT🔴** :
 Few new things have been added into the code [16/05/2021]
 - [ ] different names is asked for each seat
